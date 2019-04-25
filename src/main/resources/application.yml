@@ -1,0 +1,28 @@
+---
+spec:
+  name: "customclaimsrolesparser"
+---
+micronaut:
+  application:
+    name: my-secured-app2
+  security:
+    enabled: true
+    oauth2:
+      client-id: '${OIDC_CLIENT_ID}'
+      client-secret: '${OIDC_CLIENT_SECRET}'
+      issuer: '${OIDC_ISSUER}'
+      grant-type-password:
+        enabled: true
+      openid:
+        issuer: '${OIDC_ISSUER}'
+    session:
+      enabled: true
+    token:
+      jwt:
+        enabled: true
+        signatures:
+          jwks:
+            mykeycloak:
+              url: '${OIDC_JWKS_URI}' #Got from https://keycloak.server/auth/realms/my-realm/.well-known/openid-configuration
+        cookie:
+          enabled: true
